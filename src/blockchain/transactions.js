@@ -3,8 +3,8 @@ class Transactions {
     this.pool = [];
   }
 
-  addToPool(transaction) {
-    this.pool.push(transaction);
+  addToPool(transactions) {
+    Array.prototype.push.apply(this.pool, transactions);
   }
 
   empty() {
@@ -12,4 +12,4 @@ class Transactions {
   }
 }
 
-moduel.exports = Transactions;
+module.exports = Transactions;
