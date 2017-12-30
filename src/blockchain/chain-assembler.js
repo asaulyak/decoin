@@ -2,7 +2,10 @@ const Block = require('./block');
 
 class ChainAssembler {
   createGenesisBlock() {
-    return new Block(0, Date.now(), 'Genesis Block', '0');
+    return new Block(0, Date.now(), {
+      proof: 36,
+      transactions: []
+    }, '0');
   }
 
   nextBlock(lastBlock, data) {
