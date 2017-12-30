@@ -19,5 +19,8 @@
   "devDependencies": {
     "jasmine-node-karma": "^1.6.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
 }

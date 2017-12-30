@@ -1,8 +1,10 @@
 const ChainAssembler = require('./chain-assembler');
 
+const assembler = new ChainAssembler();
+
 class Blockchain {
   constructor() {
-    this.blocks = [];
+    this.blocks = [assembler.createGenesisBlock()];
   }
 
   addBlock(block) {
