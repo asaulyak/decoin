@@ -1,17 +1,21 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {WalletComponent} from './wallet.component';
-
+import {WalletService} from './wallet.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     WalletComponent
   ],
-  imports: [
-    BrowserModule
+  providers: [
+    WalletService
   ],
-  providers: [],
-  bootstrap: [WalletComponent]
+  exports: [
+    WalletComponent
+  ],
+  imports: [
+    HttpClientModule
+  ]
 })
 export class WalletModule {
 

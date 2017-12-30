@@ -3,10 +3,15 @@ const bodyParser = require('body-parser');
 const Transactions = require('./transactions');
 const Blockchain = require('./blockchain');
 const Miner = require('./miner');
+const cors = require('cors');
 
 const app = express();
 const router = express.Router();
+
 app.use(bodyParser.json());
+app.use(cors({
+  origin: '*'
+}));
 
 const transactions = new Transactions();
 const blockchain = new Blockchain();
