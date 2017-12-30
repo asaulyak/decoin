@@ -14,6 +14,10 @@ class Blockchain {
   get chain() {
     return this.blocks;
   }
+
+  get last() {
+    return this.blocks[this.blocks.length - 1]
+  }
 }
 
 module.exports = Blockchain;
