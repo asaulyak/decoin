@@ -11,12 +11,24 @@ class Blockchain {
     this.blocks.push(block);
   }
 
-  get chain() {
-    return this.blocks;
-  }
-
   get last() {
     return this.blocks[this.blocks.length - 1]
+  }
+
+  transactions(address) {
+    let transactions = this.blocks
+      .reduce((previous, current) => {
+      Array.prototype.push.apply(previous, current.data.transactions);
+
+      return previous;
+    }, []);
+
+    if(address) {
+      transactions = transactions.filter(transaction => transaction.to === address
+        || transaction.from === address);
+    }
+
+    return transactions;
   }
 }
 

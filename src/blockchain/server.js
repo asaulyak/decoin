@@ -5,31 +5,60 @@ const Blockchain = require('./blockchain');
 const Miner = require('./miner');
 
 const app = express();
+const router = express.Router();
 app.use(bodyParser.json());
 
 const transactions = new Transactions();
 const blockchain = new Blockchain();
 const minerAddress = 'some_address';
 
-app.post('/txion', (req, res) => {
-  const newTransactions = req.body.transactions;
-  if(newTransactions) {
-    transactions.addToPool(newTransactions);
-    res.send(204);
-  }
-  else {
-    res.send(400);
-  }
-});
+router.route('/transactions')
+  .post((req, res) => {
+    const newTransactions = req.body.transactions;
+    if (newTransactions) {
+      transactions.addToPool(newTransactions);
+      res.send(204);
+    }
+    else {
+      res.send(400);
+    }
+  })
+  .get((req, res) => {
+    const transactions = blockchain.transactions();
 
-app.get('/mine', (req, res) => {
-  const lastBlock = blockchain.last;
-  const block = Miner.mineNewBlock(lastBlock, transactions, minerAddress);
+    res.json({
+      content: {
+        transactions
+      }
+    });
+  });
 
-  blockchain.addBlock(block);
-  transactions.empty();
+router.route('/transactions/:address')
+  .get((req, res) => {
+    const transactions = blockchain.transactions(req.params.address);
 
-  res.json(block);
-});
+    res.json({
+      content: {
+        transactions
+      }
+    });
+  });
+
+router.route('/mine')
+  .get((req, res) => {
+    const lastBlock = blockchain.last;
+    const block = Miner.mineNewBlock(lastBlock, transactions, minerAddress);
+
+    blockchain.addBlock(block);
+    transactions.empty();
+
+    res.json({
+      content: {
+        block
+      }
+    });
+  });
+
+app.use(router);
 
 app.listen(3030, () => console.log('Listening http on port: ' + 3030));
