@@ -1,10 +1,10 @@
-const Blockchain = require('./chain');
+const CjainAssembler = require('./chain-assembler');
 
-describe('Blockchain', () => {
+describe('ChainAssembler', () => {
   let chain;
 
   beforeEach(() => {
-    chain = new Blockchain();
+    chain = new CjainAssembler();
   });
 
   it('should generate genesis block', () => {

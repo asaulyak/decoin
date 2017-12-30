@@ -1,6 +1,6 @@
 const Block = require('./block');
 
-class Blockchain {
+class ChainAssembler {
   createGenesisBlock() {
     return new Block(0, Date.now(), 'Genesis Block', '0');
   }
@@ -10,4 +10,4 @@ class Blockchain {
   }
 }
 
-module.exports = Blockchain;
+module.exports = ChainAssembler;
