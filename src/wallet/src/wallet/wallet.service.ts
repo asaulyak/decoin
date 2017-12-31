@@ -10,11 +10,6 @@ export class WalletService {
 
   }
 
-  getTransactions(address: string): Observable<Transaction[]> {
-    return this.http.get<DecoinResponse>(`/transactions/${address}`)
-      .map(response => response.content.transactions);
-  }
-
   getWallet(): Observable<Wallet> {
     return this.http.get<DecoinResponse>('/wallet')
       .map(response => response.content.wallet);
@@ -36,12 +31,6 @@ export interface DecoinResponse {
   content: {
     [key: string]: any
   }
-}
-
-export interface Transaction {
-  from: string;
-  to: string;
-  amount: number;
 }
 
 export interface Wallet {

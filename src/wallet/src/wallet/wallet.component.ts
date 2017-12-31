@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Transaction, Wallet, WalletService} from './wallet.service';
+import {Wallet, WalletService} from './wallet.service';
 import 'rxjs/add/operator/mergeMap';
 
 @Component({
@@ -8,7 +8,6 @@ import 'rxjs/add/operator/mergeMap';
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-  public transactions: Transaction[];
   public wallet: Wallet = {
     address: '',
     balance: 0

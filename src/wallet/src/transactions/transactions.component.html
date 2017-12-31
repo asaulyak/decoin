@@ -1,0 +1,19 @@
+<div class="content">
+  <div class="title">Transactions History</div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{transaction.from | slice:0:16}}</td>
+      <td>{{transaction.to | slice:0:16}}</td>
+      <td>{{transaction.amount}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

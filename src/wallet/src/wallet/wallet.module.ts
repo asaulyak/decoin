@@ -3,6 +3,7 @@ import {WalletComponent} from './wallet.component';
 import {WalletService} from './wallet.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {TransactionsModule} from '../transactions/transactions.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {FormsModule} from '@angular/forms';
   ],
   imports: [
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    TransactionsModule
   ]
 })
 export class WalletModule {
