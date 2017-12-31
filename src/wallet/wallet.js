@@ -52,7 +52,7 @@ class Wallet {
   }
 
   get address() {
-    return this.key.getPublic('hex');
+    return this.key ? this.key.getPublic('hex') : '';
   }
 }
 
