@@ -54,14 +54,28 @@ router.route('/wallet')
 
 router.route('/transactions')
   .post((req, res) => {
-    req
-      .pipe(request.post(`${baseUrl}/transactions/`))
+    const transaction = wallet.send(req.body.to, req.body.amount);
+    const payload = {
+      transactions: [transaction]
+    };
+
+    request({
+      uri: `${baseUrl}/transactions/`,
+      method: 'POST',
+      json: payload
+    })
       .pipe(res);
   });
 
 router.route('/transactions/:address')
   .get((req, res) => {
     request.get(`${baseUrl}/transactions/${req.params.address}`)
+      .pipe(res);
+  });
+
+router.route('/mine')
+  .get((req, res) => {
+    request.get(`${baseUrl}/mine`)
       .pipe(res);
   });
 
