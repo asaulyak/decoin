@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {config} from '../config';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
@@ -11,7 +10,7 @@ export class WalletService {
 
   }
 
-  getTransactions(address): Observable<Transaction[]> {
+  getTransactions(address: string): Observable<Transaction[]> {
     return this.http.get<DecoinResponse>(`/transactions/${address}`)
       .map(response => response.content.transactions);
   }
@@ -19,6 +18,17 @@ export class WalletService {
   getWallet(): Observable<Wallet> {
     return this.http.get<DecoinResponse>('/wallet')
       .map(response => response.content.wallet);
+  }
+
+  send(to: string, amount: number) {
+    return this.http.post('/transactions', {
+      to,
+      amount
+    });
+  }
+
+  mine() {
+    return this.http.post('/mine', null);
   }
 }
 

@@ -13,6 +13,8 @@ export class WalletComponent implements OnInit {
     address: '',
     balance: 0
   };
+  public amountToSend: number = 0;
+  public receiver: string;
 
   constructor(private walletService: WalletService) {
 
@@ -21,5 +23,15 @@ export class WalletComponent implements OnInit {
   ngOnInit() {
     this.walletService.getWallet()
       .subscribe(wallet => this.wallet = wallet);
+  }
+
+  onSendClick() {
+    this.walletService.send(this.receiver, this.amountToSend)
+      .subscribe();
+  }
+
+  onMineClick() {
+    this.walletService.mine()
+      .subscribe(() => window.location.reload());
   }
 }
