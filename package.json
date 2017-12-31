@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/blockchain/server.js",
-    "test-blockchain": "jasmine-node-karma ./"
+    "test": "jasmine-node-karma ./"
   },
   "repository": {
     "type": "git",
