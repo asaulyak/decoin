@@ -1,7 +1,46 @@
-<div>
-  <div>Wallet</div>
-  <div>
-    <span>Balance:</span>
-    <span>{{balance}}</span>
+<div class="content">
+  <h1>Decoin Wallet</h1>
+  <div class="box">
+    <div class="media-content">
+      <h2 class="sub-title">Your public address:</h2>
+
+      <div>{{wallet.id}}</div>
+    </div>
+    <div class="media-content">
+      <h2 class="sub-title">Your balance:</h2>
+      <div>{{balance}} coins</div>
+    </div>
+  </div>
+  <div class="content">
+    <h2 class="title">Send coins</h2>
+    <div class="box">
+      <div class="media-content">
+        <div class="columns">
+          <div class="column is-three-quarters">
+            <label class="label">To</label>
+          </div>
+          <div class="column is-one-quarter">
+            <label class="label">Amount</label>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column is-three-quarters">
+            <div class="control">
+              <input class="input" type="text" placeholder="Receiver address"/>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="control">
+              <input class="input" type="text" placeholder="0" value="0"/>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+            <a class="button is-link">Send</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
