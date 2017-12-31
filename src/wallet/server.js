@@ -16,7 +16,7 @@ router.route('/wallet')
     wallet.initWallet()
       .then(wallet => {
         return new Promise((resolve, reject) => {
-          request.get(`${baseUrl}/transactions/${req.params.address}`, (error, response, body) => {
+          request.get(`${baseUrl}/transactions/${wallet.address}`, (error, response, body) => {
             if(!error) {
               const transactions = JSON.parse(body).content.transactions;
               resolve(Object.assign({}, wallet, {transactions}));
@@ -60,25 +60,30 @@ router.route('/transactions')
     };
 
     request({
-      uri: `${baseUrl}/transactions/`,
+      uri: `${baseUrl}/transactions`,
+      method: 'POST',
+      json: payload
+    })
+      .pipe(res);
+  })
+  .get((req, res) => {
+    request.get(`${baseUrl}/transactions/${wallet.address}`)
+      .pipe(res);
+  });
+
+router.route('/mine')
+  .post((req, res) => {
+    const payload = {
+      miner: wallet.address
+    };
+
+    request({
+      uri: `${baseUrl}/mine`,
       method: 'POST',
       json: payload
     })
       .pipe(res);
   });
-
-router.route('/transactions/:address')
-  .get((req, res) => {
-    request.get(`${baseUrl}/transactions/${req.params.address}`)
-      .pipe(res);
-  });
-
-router.route('/mine')
-  .get((req, res) => {
-    request.get(`${baseUrl}/mine`)
-      .pipe(res);
-  });
-
 
 app.use(router);
 

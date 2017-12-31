@@ -50,6 +50,10 @@ class Wallet {
 
     return Object.assign({}, transaction, {signature: Buffer.from(signature).toString('hex')});
   }
+
+  get address() {
+    return this.key.getPublic('hex');
+  }
 }
 
 module.exports = Wallet;

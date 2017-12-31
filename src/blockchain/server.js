@@ -15,7 +15,6 @@ app.use(cors({
 
 const transactions = new Transactions();
 const blockchain = new Blockchain();
-const minerAddress = 'some_address';
 
 router.route('/transactions')
   .post((req, res) => {
@@ -50,8 +49,9 @@ router.route('/transactions/:address')
   });
 
 router.route('/mine')
-  .get((req, res) => {
+  .post((req, res) => {
     const lastBlock = blockchain.last;
+    const minerAddress = req.body.miner;
     const block = Miner.mineNewBlock(lastBlock, transactions, minerAddress);
 
     blockchain.addBlock(block);
