@@ -9,8 +9,10 @@ import 'rxjs/add/operator/mergeMap';
 })
 export class WalletComponent implements OnInit {
   public transactions: Transaction[];
-  public balance: number = 0;
-  public wallet: Wallet;
+  public wallet: Wallet = {
+    address: '',
+    balance: 0
+  };
 
   constructor(private walletService: WalletService) {
 
@@ -18,24 +20,6 @@ export class WalletComponent implements OnInit {
 
   ngOnInit() {
     this.walletService.getWallet()
-      .flatMap(wallet => {
-        this.wallet = wallet;
-
-        return this.walletService.getTransactions();
-      })
-      .subscribe(transactions => {
-        this.transactions = transactions;
-        this.balance = this.transactions
-          .reduce((previous, current) => {
-            if (current.from === this.wallet.id) {
-              previous -= current.amount;
-            }
-            else if (current.to === this.wallet.id) {
-              previous += current.amount;
-            }
-
-            return previous;
-          }, 0);
-      });
+      .subscribe(wallet => this.wallet = wallet);
   }
 }
